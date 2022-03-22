@@ -73,10 +73,13 @@ void imprimeTabuleiro(vector<vector<int> > & tabuleiro, int n)
 
 void executar(vector<vector<int> > & tabuleiro, int n, int col)
 {
+
 	if(col == n)
 	{
 		//cout << "Solucao " << col + 1 << ":\n\n";
 		imprimeTabuleiro(tabuleiro, n);
+
+        cout << " ---------------------------" << endl;
 		//sol++;
 		return;
 	}
@@ -100,21 +103,20 @@ void executar(vector<vector<int> > & tabuleiro, int n, int col)
 
 int main()
 {
-    int i, j, m, n, x, y;
+    int  n;
 
 	vector<vector<int> > tabuleiro;
     
 
     cout << "Insira o seu N" << endl;
     cin >> n;
-    i = n;
-    j = n;
 
     for(int i = 0; i < n; i++)
 	{
 		vector<int> linha(n);
 		tabuleiro.push_back(linha);
 	}
+    cout << "Solucoes: " << endl;
     executar(tabuleiro, n, 0);
 
     
