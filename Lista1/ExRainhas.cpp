@@ -4,8 +4,9 @@
 
 using namespace std;
 
+int nPossibilidades = 1;
 
-bool seguro(vector<vector<int> > & tabuleiro, int n, int lin, int col)
+bool ValidaPosicao(vector<vector<int> > & tabuleiro, int n, int lin, int col)
 {
 	int i, j;
 
@@ -66,34 +67,35 @@ void imprimeTabuleiro(vector<vector<int> > & tabuleiro, int n)
 			else
 				cout << "-\t";
 		}
-		cout << "\n\n";
+		cout << "\n";
 	}
 	cout << "\n";
 }
 
-void executar(vector<vector<int> > & tabuleiro, int n, int col)
+void PosicionaRainhas(vector<vector<int> > & tabuleiro, int n, int col)
 {
 
 	if(col == n)
 	{
-		//cout << "Solucao " << col + 1 << ":\n\n";
+		cout << "Possibilidade: " << nPossibilidades << "\n";
 		imprimeTabuleiro(tabuleiro, n);
 
         cout << " ---------------------------" << endl;
-		//sol++;
+		nPossibilidades++;
 		return;
 	}
 
+    
 	for(int i = 0; i < n; i++)
 	{
 		// verifica se é seguro colocar a rainha naquela coluna
-		if(seguro(tabuleiro, n, i, col))
+		if(ValidaPosicao(tabuleiro, n, i, col))
 		{
 			// insere a rainha (marca com 1)
 			tabuleiro[i][col] = 1;
 
 			// chamada recursiva
-			executar(tabuleiro, n, col + 1);
+			PosicionaRainhas(tabuleiro, n, col + 1);
 
 			// remove a rainha (backtracking)
 			tabuleiro[i][col] = 0;
@@ -116,12 +118,9 @@ int main()
 		vector<int> linha(n);
 		tabuleiro.push_back(linha);
 	}
-    cout << "Solucoes: " << endl;
-    executar(tabuleiro, n, 0);
 
-    
-    
-    cout << "Finalizando" << endl;
+    cout << "Solucoes para N = " << n << ": " << endl;
+    PosicionaRainhas(tabuleiro, n, 0);
 
     return 0;
 }
